@@ -53,7 +53,7 @@ void finish(int result) {
 }
 
 void main_loop() {
-  printf("main loop %d \n", __LINE__);
+  //printf("main loop %d \n", __LINE__);
   static char out[1024*2];
   static int pos = 0;
   fd_set fdr;
@@ -76,7 +76,7 @@ void main_loop() {
     if (!FD_ISSET(server.fd, &fdr)) {
       return;
     }
-  printf("main loop %d \n", __LINE__);
+  //printf("main loop %d \n", __LINE__);
 
 #if !TEST_DGRAM
     // as a test, confirm with ioctl that we have data available
@@ -86,7 +86,7 @@ void main_loop() {
     assert(res != -1);
     assert(available);
 #endif
-  printf("main loop %d \n", __LINE__);
+   //printf("main loop %d \n", __LINE__);
 
     res = do_msg_read(server.fd, &server.msg, echo_read, 0, NULL, NULL);
     if (res == -1) {
@@ -95,7 +95,7 @@ void main_loop() {
       perror("server closed");
       finish(EXIT_FAILURE);
     }
-  printf("main loop %d \n", __LINE__);
+   printf("main loop %d %s \n", __LINE__, server.msg);
 
     echo_read += res;
 
@@ -105,7 +105,7 @@ void main_loop() {
       finish(EXIT_SUCCESS);
     }
   }
-  printf("main loop %d \n", __LINE__);
+  //printf("main loop %d \n", __LINE__);
 
   if (server.state == MSG_WRITE) {
     if (!FD_ISSET(server.fd, &fdw)) {
@@ -127,7 +127,7 @@ void main_loop() {
       server.state = MSG_READ;
     }
   }
-  printf("main loop %d \n", __LINE__);
+  //printf("main loop %d \n", __LINE__);
 }
 
 // The callbacks for the async network events have a different signature than from
