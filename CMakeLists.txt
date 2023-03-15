@@ -20,7 +20,9 @@ message(STATUS "Cmake prefix path: ${CMAKE_PREFIX_PATH}")
 #endif()
 
 
-add_executable(${PROJECT_NAME} main.cpp)
+#add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} test_sockets_echo_client.c)
+
 set_target_properties(${PROJECT_NAME} PROPERTIES CMAKE_DEBUG_POSTFIX _d)
 if (NOT EMSCRIPTEN)
     find_package(glfw3 REQUIRED)
